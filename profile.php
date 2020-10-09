@@ -62,6 +62,7 @@ button:hover, a:hover {
 
   <br>
   <button type="submit" class="btn btn-default">Submit</button>
+  <a href="index.php" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Skip</a>
   </form>
   
 <br>

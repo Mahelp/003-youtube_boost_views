@@ -18,7 +18,7 @@ try{
 
 
     // récupération de l'email(idf) et du mot de passe en bdd en fonction des deux param
-    $sth = $dbco->prepare("SELECT id,email,pass FROM  youtube_user 
+    $sth = $dbco->prepare("SELECT id,email,pass,id_chaine FROM  youtube_user 
                           WHERE email=:email AND  pass=:pass
                         ");
     
@@ -44,6 +44,7 @@ try{
           
                    
                     $_SESSION['id']=$row["id"];
+                    $_SESSION['id_chaine']=$row["id_chaine"];
                   //  echo  $_SESSION['id'];
                     
 

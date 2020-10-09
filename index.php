@@ -1,5 +1,6 @@
 <?php
-    include 'includes/cnx.php';
+ session_start();
+include 'includes/cnx.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,6 +13,7 @@
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.css" rel="stylesheet">
+    
     <style>
     body{
       padding-top: 100px;
@@ -50,15 +52,69 @@
           </ul>
         
 
+                            <?php
+                             include  'includes/cnx.php';
+
+
+                             
+                            
+                             try{
+                               
+                                 // vérification de l'accés a la bd
+                                 
+                                   $dbco = new PDO("mysql:host=$servname;dbname=$dbname", $user, $pass);
+                                   $dbco->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                                 
+                                 // récupération des paramétres 
+                                 $id = $_SESSION['id'];
+                             
+                                 // récupération de l'email(idf) et du mot de passe en bdd en fonction des deux param
+                                 $sth = $dbco->prepare("SELECT id,coins_value FROM  youtube_user 
+                                                       WHERE id=:id 
+                                                     ");
+                                 
+                                 $sth->execute(array(
+                                             
+                                             ':id' => $id
+                                           ));
+                                 
+                                 echo "okkkkkkkkkkkk ";
+                                 
+                                 
+                                 if($sth->execute(array(':id' => $id)) && $row = $sth->fetch())
+                                 {
+                                   $id = $row['id'];    // Récupération de la clé
+                                   $coins_value = $row['coins_value']; // $actif contiendra alors 0 ou 1
+                                 
+                                 }
+
+                                } // fin try
+
+
+                                catch(PDOException $e){
+                                    echo "Erreur : " . $e->getMessage();
+                              
+                            }// fin catch
+                            
+                            $dbco=null;
+                            
+
+
+
+                            ?>
+
+
           <ul class="nav navbar-nav navbar-right">
         <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
         <li><a href="profile.php"><span class="glyphicon glyphicon-log-in"></span> Your profile</a></li>
 
         
         
+
+
         <li>
         <a href="#" class="btn btn-danger btn-lg">
-          <span class="glyphicon glyphicon-bitcoin"></span>Coins : 0 
+          <span class="glyphicon glyphicon-bitcoin"></span>Coins : <?php echo $coins_value ?> 
         </a>
         </li>
       
@@ -74,15 +130,14 @@
 
 
     <ul class="tabs">
-      <li class="btn btn-primary active"><a style="color:#FFFFFF" href="#tab1"><h1> 1- View video and win coins</h1></a></li>
-      <li class="btn btn-success"><a  style="color:#FFFFFF"href="#tab2"><h1> 2- Boost views by coins </h1></a></li>
+      <li class="btn btn-primary active"><a style="color:#FFFFFF" href="#tab1"><h1> <span class="glyphicon glyphicon-facetime-video"></span> View video and win coins</h1></a></li>
+      <li class="btn btn-success"><a  style="color:#FFFFFF"href="#tab2"><h1> <img src="coins_icone.png" class="img-rounded" alt="Cinque Terre">
+     Boost views by coins </h1></a></li>
       <!-- <li class="btn btn-default"><a href="#tab3">Menu 3</a></li>-->
     </ul>
     
     <div class="article" id="tab1">
-    <h3>Contenu 1</h3>
-    
-
+  
     <?php
 
     $limit = 1;
@@ -123,7 +178,7 @@
 
 ?>
 
-<h2 class="">total videos :  <span class="badge">Total: <?= $total_results; ?></span></h2>
+<h2 class="text-left"> total video :  <span class="badge">Total: <?= $total_results; ?></span></h2>
 
 <div class=row>
 
@@ -163,7 +218,12 @@
     <div class="col-xs-2"  > <h1> <span  class="bg-primary" id="count">0</span></h1></div>
     <div class="col-xs-10"  > <h1> 100 Coins</h1></div>
     
-     
+    
+    
+
+
+
+
     
         <script>
               
@@ -189,7 +249,7 @@
       
         player = new YT.Player('player', {
           height: '500',
-          width: '500',
+          width: '900',
           videoId: id_video,
           events: {
             'onReady': onPlayerReady,
@@ -251,12 +311,14 @@
                                   
                                     $.ajax({
                                     url: 'functions.php', 
-                                    type: 'GET',
+                                    type: 'POST',
                                     data: 'wincoins='+wincoins,
                                     success: function(data){
                                           // instructions
                                           console.log(wincoins);
-                                          
+                                         // document.getElementById('wincoins').innerHTML=wincoins; 
+                                          //wincoins=document.getElementById('mycoins_60').value; 
+                                          window.location.href = "functions.php?flag_view_count_ok="+wincoins+"&id_chaine="+id_video ;
                                     }
                                           });
                           
@@ -336,15 +398,83 @@ function updateHTML(elmId, value) {
 
     <div class="article" id="tab2">
     <h3>Contenu 2</h3>
-    <p>
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-    </p>
+    
+
+
+
+    <form class="form-group" action="action_create_campaign.php" method="post">
+          <div class="form-group">
+            <label for="url">Url video:</label>
+            <input type="text" class="form-control" name="id_chaine"  placeholder="<?php echo "https://www.youtube.com/watch?v=".$_SESSION['id_chaine']?>" required>
+            
+          </div>
+          <button type="submit" class="btn-lg btn-default">Submit</button>
+   </form>
+
+                          <div class="row">
+                          <div class="col-sm-4">
+                          
+                          <form class="form-inline" action="action_create_campaign.php" method="post">
+                              <label for="url">insert coins</label>
+                              <input type="text" class="form-control" name="coins_value" required>
+                              <br>
+                              <button type="submit" class="btn-lg btn-primary">Create campaign</button>
+                          <form>
+                          
+                                 
+                          
+                                             
+
+                          </div><!--col-sm-4-->
+                          
+                          
+                          
+                          <div class="col-sm-8"><h4>You  have : 800 coins</h4> </div>
+                        
+                        </div><!--fin <div class="row">-->
+
+    </div> <!-- fin <div class="article" id="tab2"> -->
+
+
+    <br>
+    
+    <div class="page-header">
+    <h1> <p class="text-primary" >sponsored videos</p> </h1>   
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+    
     </div>
+    
+
+  <div class=row>
+
+<div class="col-xs-2"> ----- </div>
+<div class="col-xs-2"> +++++ </div>
+<div class="col-xs-2">////// </div>
+<div class="col-xs-2"> ......</div>
+<div class="col-xs-2"> 11222 </div>
+<div class="col-xs-2"> 989898 </div>
+
+</div>
+<br>
+<br>
+
+
+
+
 
 <!-- Footer -->
 <footer class="page-footer font-small blue">
