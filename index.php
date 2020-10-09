@@ -114,12 +114,11 @@ include 'includes/cnx.php';
 
         <li>
         <a href="#" class="btn btn-danger btn-lg">
-          <span class="glyphicon glyphicon-bitcoin"></span>Coins : <?php echo $coins_value ?> 
+          <span class="glyphicon glyphicon-bitcoin"></span><img src="coins_icone_min.png" class="img-rounded" alt="coins"> <?php if (isset($coins_value)) echo $coins_value ?> 
         </a>
         </li>
       
       </ul>
-
 
         </div><!--/.nav-collapse -->
       </div>
@@ -131,8 +130,8 @@ include 'includes/cnx.php';
 
     <ul class="tabs">
       <li class="btn btn-primary active"><a style="color:#FFFFFF" href="#tab1"><h1> <span class="glyphicon glyphicon-facetime-video"></span> View video and win coins</h1></a></li>
-      <li class="btn btn-success"><a  style="color:#FFFFFF"href="#tab2"><h1> <img src="coins_icone.png" class="img-rounded" alt="Cinque Terre">
-     Boost views by coins </h1></a></li>
+      <li class="btn btn-success"><a  style="color:#FFFFFF"href="#tab2"><h1> <span class="glyphicon glyphicon-bullhorn"></span>
+     Campaign boost views </h1></a></li>
       <!-- <li class="btn btn-default"><a href="#tab3">Menu 3</a></li>-->
     </ul>
     
@@ -216,7 +215,7 @@ include 'includes/cnx.php';
 
     
     <div class="col-xs-2"  > <h1> <span  class="bg-primary" id="count">0</span></h1></div>
-    <div class="col-xs-10"  > <h1> 100 Coins</h1></div>
+    <div class="col-xs-10"  > <h3> 100  <img src="coins_icone.png" class="img-rounded" alt="coins"></h3></div>
     
     
     
@@ -310,7 +309,7 @@ include 'includes/cnx.php';
                           
                                   
                                     $.ajax({
-                                    url: 'functions.php', 
+                                    url: 'action_add_coins_campaign.php', 
                                     type: 'POST',
                                     data: 'wincoins='+wincoins,
                                     success: function(data){
@@ -318,7 +317,7 @@ include 'includes/cnx.php';
                                           console.log(wincoins);
                                          // document.getElementById('wincoins').innerHTML=wincoins; 
                                           //wincoins=document.getElementById('mycoins_60').value; 
-                                          window.location.href = "functions.php?flag_view_count_ok="+wincoins+"&id_chaine="+id_video ;
+                                          window.location.href = "action_add_coins_campaign.php?flag_view_count_ok="+wincoins+"&id_chaine="+id_video ;
                                     }
                                           });
                           
@@ -429,7 +428,7 @@ function updateHTML(elmId, value) {
                           
                           
                           
-                          <div class="col-sm-8"><h4>You  have : 800 coins</h4> </div>
+                          <div class="col-sm-8"><h4>You  have : <img src="coins_icone_min.png" class="img-rounded" alt="coins"> <?php if (isset($coins_value)) echo $coins_value ?></h4> </div>
                         
                         </div><!--fin <div class="row">-->
 
@@ -437,8 +436,10 @@ function updateHTML(elmId, value) {
 
 
     <br>
+    <br>
+    <br>
     
-    <div class="page-header">
+    <div class="page-header ">
     <h1> <p class="text-primary" >sponsored videos</p> </h1>   
   
   
