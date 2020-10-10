@@ -131,7 +131,7 @@ h2,p{
             Sign Up
         </button>
       <a href="./resetpassword.php">Forgot your password? </a>
-
+<br>
       
     </div>
 
