@@ -12,7 +12,7 @@ try{
 
 // récupération des paramétres 
 
-  $login_name='0';//strip_tags($_POST['login_name']);
+  $login_name=strip_tags($_POST['login_name']);
   $email=strip_tags($_POST['email']);
   $pass=strip_tags($_POST['pass']);
   $cle='0';//strip_tags($_POST['cle']);

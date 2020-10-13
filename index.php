@@ -1,6 +1,8 @@
 <?php
  session_start();
 include 'includes/cnx.php';
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -8,7 +10,8 @@ include 'includes/cnx.php';
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    
+    
     <title>Navigation Tab</title>
 
     <!-- Bootstrap core CSS -->
@@ -28,10 +31,17 @@ include 'includes/cnx.php';
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+ 
+ 
+ 
+    
   </head>
 
   <body>
-
+  
+  <script src="https://cdn.jsdelivr.net/gh/mathusummut/confetti.js/confetti.min.js"></script>
+    <script>confetti.start(50); </script>
+   
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -54,9 +64,6 @@ include 'includes/cnx.php';
 
                             <?php
                              include  'includes/cnx.php';
-
-
-                             
                             
                              try{
                                
@@ -78,8 +85,7 @@ include 'includes/cnx.php';
                                              ':id' => $id
                                            ));
                                  
-                                 echo "okkkkkkkkkkkk ";
-                                 
+                                                                
                                  
                                  if($sth->execute(array(':id' => $id)) && $row = $sth->fetch())
                                  {
@@ -105,20 +111,26 @@ include 'includes/cnx.php';
 
 
           <ul class="nav navbar-nav navbar-right">
-        <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
-        <li><a href="profile.php"><span class="glyphicon glyphicon-log-in"></span> Your profile</a></li>
 
-        
-        
-
-
+          
+          
         <li>
         <a href="#" class="btn btn-danger btn-lg">
-          <span class="glyphicon glyphicon-bitcoin"></span><img src="coins_icone_min.png" class="img-rounded" alt="coins"> <?php if (isset($coins_value)) echo $coins_value ?> 
+          <span class="glyphicon glyphicon-bitcoin"></span><img src="coins_icone_min.png" class="img-rounded" alt="coins"> <?php if (isset($coins_value)) echo $coins_value;?> 
         </a>
         </li>
+
       
+
+        <li><a href="profile_todo.php"><span class="glyphicon glyphicon-user"></span> Welcome :<?php  if (isset($_SESSION['login_name'])) echo $_SESSION['login_name']; ?></a></li>
+      
+        <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+
       </ul>
+
+      
+
+
 
         </div><!--/.nav-collapse -->
       </div>
@@ -177,7 +189,7 @@ include 'includes/cnx.php';
 
 ?>
 
-<h2 class="text-left"> total video :  <span class="badge">Total: <?= $total_results; ?></span></h2>
+<!--<h2 class="text-left"> total video :  <span class="badge">Total: //$total_results;</span></h2>-->
 
 <div class=row>
 
@@ -187,8 +199,9 @@ include 'includes/cnx.php';
 
       foreach($results as $result){ 
          
+          //echo "<input type=hidden id=variableAPasser value=".$result->id_chaine."/>";
           echo "<input type=hidden id=variableAPasser value=".$result->id_chaine."/>";
-
+          
           ?>
           
             <div id="player"></div>
@@ -214,8 +227,8 @@ include 'includes/cnx.php';
     </div> <!-- fin div col-xs-12-->
 
     
-    <div class="col-xs-2"  > <h1> <span  class="bg-primary" id="count">0</span></h1></div>
-    <div class="col-xs-10"  > <h3> 100  <img src="coins_icone.png" class="img-rounded" alt="coins"></h3></div>
+    <div class="col-xs-2"  > <h1> <span  class="btn btn-danger btn-lg" id="count">0</span></h1></div>
+    <div class="col-xs-10"  > <h1><span class="btn btn-danger btn-lg"> 100</span> <img src="coins_icone.png" class="img-rounded" alt="coins"></h1></div>
     
     
     
@@ -252,7 +265,8 @@ include 'includes/cnx.php';
           videoId: id_video,
           events: {
             'onReady': onPlayerReady,
-            'onStateChange': onPlayerStateChange
+            'onStateChange': onPlayerStateChange,
+            
           }
         });
      
@@ -261,12 +275,10 @@ include 'includes/cnx.php';
       }
 
       // 4. The API will call this function when the video player is ready.
+    
       function onPlayerReady(event) {
         
         event.target.playVideo();
-        
-        
-       
         
         }
 
@@ -309,7 +321,7 @@ include 'includes/cnx.php';
                           
                                   
                                     $.ajax({
-                                    url: 'action_add_coins_campaign.php', 
+                                    url: '#', 
                                     type: 'POST',
                                     data: 'wincoins='+wincoins,
                                     success: function(data){
@@ -396,41 +408,29 @@ function updateHTML(elmId, value) {
     </div><!-- fin <div class="article" id="tab1"> -->
 
     <div class="article" id="tab2">
-    <h3>Contenu 2</h3>
-    
+    <h3>Create campaign</h3>
+    <div class="row">
+            <div class="col-sm-4">
+                <form class="form-group" action="action_check_campaign.php" method="post">
+                      <div class="form-group">
+                        <label for="url">Url video:</label>
+                        <input type="text" class="form-control" name="id_chaine"  placeholder="<?php echo "https://www.youtube.com/watch?v=".$_SESSION['id_chaine']?>" required>
+                          <label for="url">insert coins</label>
+                          <input type="text" class="form-control" name="coins_value_user" required placeholder="example :100">
 
-
-
-    <form class="form-group" action="action_create_campaign.php" method="post">
-          <div class="form-group">
-            <label for="url">Url video:</label>
-            <input type="text" class="form-control" name="id_chaine"  placeholder="<?php echo "https://www.youtube.com/watch?v=".$_SESSION['id_chaine']?>" required>
-            
-          </div>
-          <button type="submit" class="btn-lg btn-default">Submit</button>
-   </form>
-
-                          <div class="row">
-                          <div class="col-sm-4">
+                      </div>
+                      <button type="submit" class="btn btn-success btn-block">Create campaign</button>
+             </form>
+                 </div><!--col-sm-4-->
+                      <div class="col-sm-8">
+                      <div class="col-sm-8"><h1>You have : <img src="coins_icone_min.png" class="img-rounded" alt="coins"> <?php if (isset($coins_value)) echo $coins_value ?> Coins</h1> </div>
+                      </div><!--col-sm-8-->    
+         
+          
+   
+   
+   </div><!--fin <div class="row">-->
                           
-                          <form class="form-inline" action="action_create_campaign.php" method="post">
-                              <label for="url">insert coins</label>
-                              <input type="text" class="form-control" name="coins_value" required>
-                              <br>
-                              <button type="submit" class="btn-lg btn-primary">Create campaign</button>
-                          <form>
-                          
-                                 
-                          
-                                             
-
-                          </div><!--col-sm-4-->
-                          
-                          
-                          
-                          <div class="col-sm-8"><h4>You  have : <img src="coins_icone_min.png" class="img-rounded" alt="coins"> <?php if (isset($coins_value)) echo $coins_value ?></h4> </div>
-                        
-                        </div><!--fin <div class="row">-->
 
     </div> <!-- fin <div class="article" id="tab2"> -->
 
@@ -472,7 +472,6 @@ function updateHTML(elmId, value) {
 </div>
 <br>
 <br>
-
 
 
 

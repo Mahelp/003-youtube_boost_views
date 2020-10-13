@@ -5,12 +5,13 @@ session_start();
 <!DOCTYPE html>
 <html>
 <head>
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 <style>
 .card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  max-width: 900px;
+  max-width: 1000px;
   margin: auto;
   text-align: center;
   font-family: arial;
@@ -51,10 +52,9 @@ button:hover, a:hover {
 
 <div class="card">
   <!--<img src="/w3images/team2.jpg" alt="John" style="width:100%">-->
-  <h1>John Doe</h1>
-  <p class="title">Welcome <i class='fas fa-grin' style='font-size:48px;color:red'></i></p>
+  <h1>Welcome : <?php  if (isset($_SESSION['login_name'])) echo $_SESSION['login_name']; ?></h1>
+  <p class="title"><i class='fas fa-grin' style='font-size:48px;color:red'></i></p>
   
-  <p>Harvard University</p>
   <form action="action_profile.php" method="post">
   <div class="form-group">
     <input  name="id_chaine" type="text" class="form-control"  placeholder="ENTER YOUR URL VIDEO " required>
@@ -66,11 +66,17 @@ button:hover, a:hover {
   </form>
   
 <br>
-  <iframe width="420" height="315"
-src="https://www.youtube.com/embed/tgbNymZ7vqY">
+  <iframe width="200" height="200" src="https://www.youtube.com/embed/tgbNymZ7vqY">
 
 <div id="player"></div>
 </iframe>
+
+<h2>Your campaign list : </h2>
+      <ul>
+      <li>Campaign | detail </li>
+      <li>11111 | xxxxxx </li>
+      <li>22222 | xxxxxx </li>
+      </ul>
 
   
   <div style="margin: 24px 0;">

@@ -90,6 +90,10 @@ button:hover {
     <p>Please fill in this form to create an account.</p>
     <hr>
 
+    
+    <label for="login_name"><b>Name</b></label>
+    <input type="text" placeholder="Enter name" name="login_name" required>
+
     <label for="email"><b>Email</b></label>
     <input type="text" placeholder="Enter Email" name="email" required>
     

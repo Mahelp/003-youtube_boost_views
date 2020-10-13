@@ -3,8 +3,22 @@ session_start();
 
 include  'includes/cnx.php';
 
-try{
+function url_to_id(string $url) {
   
+   $str1="https://www.youtube.com/watch?v=";
+ 
+   $id_chaine="url erreur";
+ 
+  $id_chaine = trim(str_replace("$str1","","$url"));
+  
+  return $id_chaine;
+}
+
+
+try{
+
+ 
+
 // vérification de l'accés a la bd
 
   $dbco = new PDO("mysql:host=$servname;dbname=$dbname", $user, $pass);
@@ -13,14 +27,19 @@ try{
 // récupération des paramétres 
 
 
- $id_chaine=$_POST['id_chaine'];
+ $id_chaine=url_to_id($_POST['id_chaine']);
  $id = $_SESSION['id'];
   
+
+
  if (!empty(($id_chaine)))
  {
-// exécution de la requête d'insertion (INSERTION)
+
+  
+  // exécution de la requête d'insertion (INSERTION)
+  //interdire la maj si la video est dans une compagne active=en cours ...
   $sth = $dbco->prepare("UPDATE youtube_user SET id_chaine=:id_chaine 
-                       WHERE id=:id
+                       WHERE id=:id 
                        ");
                 $sth->execute(array(
                                     ':id_chaine' => $id_chaine,
