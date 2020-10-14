@@ -1,5 +1,14 @@
 <!DOCTYPE html>
 <html>
+<link rel="icon" href="favicon.png" type="image/gif" sizes="16x16">
+<script>
+
+function reload_page(){
+ 
+  document.location.reload(true);
+
+}
+</script>
 <style>
 form{
     width:fit-content;
@@ -97,9 +106,6 @@ button:hover {
     <label for="email"><b>Email</b></label>
     <input type="text" placeholder="Enter Email" name="email" required>
     
-    
-    
-    
     <label for="pass"><b>Password</b></label>
     <input type="password" placeholder="Enter Password" name="pass" required>
 
@@ -113,7 +119,7 @@ button:hover {
     <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
 
     <div class="clearfix">
-      <button type="button" class="cancelbtn">Cancel</button>
+      <button type="button" class="cancelbtn" onClick="reload_page()" >Cancel</button>
       <button type="submit" class="signupbtn">Sign Up</button>
     </div>
   </div>

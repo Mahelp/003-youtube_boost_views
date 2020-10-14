@@ -34,7 +34,7 @@ try
         // 2 incrémenter la compagne
 
         $sth = $dbco->prepare("UPDATE youtube_campaign_views SET count_view_chaine =count_view_chaine + 1
-                                      WHERE id_chaine=:id_chaine AND statut_campaign='EN_COURS'
+                                      WHERE id_chaine=:id_chaine AND statut_campaign='IN_PROGRESS'
                                           ");
                                   $sth->execute(array(
                                   ':id_chaine' => $id_chaine             
@@ -58,7 +58,7 @@ try
                        
                        
                        $sth = $dbco->prepare("SELECT  count_view_chaine,count_views_coins FROM youtube_campaign_views 
-                                                    WHERE id_chaine=:id_chaine AND statut_campaign='EN_COURS'
+                                                    WHERE id_chaine=:id_chaine AND statut_campaign='IN_PROGRESS'
                                                         ");
                                   $sth->execute(array(
                                    ':id_chaine' => $id_chaine             
@@ -78,7 +78,7 @@ try
                                 {
 
                                   $sth = $dbco->prepare("UPDATE youtube_campaign_views SET statut_campaign ='CLOSED'
-                                                         WHERE id_chaine=:id_chaine AND statut_campaign='EN_COURS'
+                                                         WHERE id_chaine=:id_chaine AND statut_campaign='IN_PROGRESS'
                                       ");
                                   $sth->execute(array(
                                       ':id_chaine' => $id_chaine             

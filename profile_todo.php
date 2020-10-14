@@ -1,6 +1,7 @@
 <?php
 session_start();
 ?>
+<link rel="icon" href="favicon.png" type="image/gif" sizes="16x16">
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -44,6 +45,17 @@ Custom modal, you can remove all of these for default behavior
 }
 </style>
 
+<script>
+
+function reload_page(){
+ 
+  document.location.reload(true);
+
+}
+</script>
+
+
+
 <div class="container">
 
 
@@ -70,9 +82,9 @@ Custom modal, you can remove all of these for default behavior
 <div id="navbar" class="collapse navbar-collapse">
         
         <ul class="nav navbar-nav">
-          <li class="active"><a href="#">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#contact">Contact</a></li>
+        <!-- <li class="active"><a href="#">Home</a></li>-->
+          <li><a href="Faq.php">How to </a></li>
+          <li><a href="contact.php">Contact</a></li>
         </ul>
                          
         <ul class="nav navbar-nav navbar-right">
@@ -89,20 +101,67 @@ Custom modal, you can remove all of these for default behavior
 
 
 
-
-
-
-
 <div class="row">
 
-    <h1>Welcome : <?php  if (isset($_SESSION['login_name'])) echo $_SESSION['login_name']; ?> <i class='fas fa-grin' style='font-size:48px;color:red'></i></h1>
-   
-    <p class="title"><h2>You have : <?php  if (isset($_SESSION['coins_value'])) echo $_SESSION['coins_value']; ?>  <img src="coins_icone.png" class="img-rounded" alt="coins"> </h2></p>
+       <div class="well well-lg ">
+    <h1><p class="text-center">Welcome : <?php  if (isset($_SESSION['login_name'])) echo $_SESSION['login_name']; ?> <i class='fas fa-grin' style='font-size:48px;color:red'></i></p></h1>
+    <?php
+                      // code sert à afficher les coins par la variable row et non pas session
+                      // copier coller de la page action_login.php
+                      include  'includes/cnx.php';
+                            
+                             try{
+                               
+                                 // vérification de l'accés a la bd
+                                 
+                                   $dbco = new PDO("mysql:host=$servname;dbname=$dbname", $user, $pass);
+                                   $dbco->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                                 
+                                 // récupération des paramétres 
+                                 $id = $_SESSION['id'];
+                             
+                                 // récupération de l'email(idf) et du mot de passe en bdd en fonction des deux param
+                                 $sth = $dbco->prepare("SELECT id,coins_value FROM  youtube_user 
+                                                       WHERE id=:id 
+                                                     ");
+                                 
+                                 $sth->execute(array(
+                                             
+                                             ':id' => $id
+                                           ));
+                                 
+                                                                
+                                 
+                                 if($sth->execute(array(':id' => $id)) && $row = $sth->fetch())
+                                 {
+                                   $id = $row['id'];    // Récupération de la clé
+                                   $coins_value = $row['coins_value']; // $actif contiendra alors 0 ou 1
+                                 
+                                 }
+
+                                } // fin try
+
+
+                                catch(PDOException $e){
+                                    echo "Erreur : " . $e->getMessage();
+                              
+                            }// fin catch
+                            
+                            $dbco=null;
+                            
+
+
+
+                            ?>
+
+
+
+    <h1><p class="text-center">You have : <?php  if (isset($row['coins_value'])) echo $row['coins_value']; ?>  <img src="coins_icone.png" class="img-rounded" alt="coins"> </p></h1>
   
+       </div>
+<!--   
   <hr>
-
-
-  
+ 
 <div class="row">
   
   
@@ -118,7 +177,7 @@ Custom modal, you can remove all of these for default behavior
           </button>
           <a href="index.php" class="btn btn-danger" title="skip" >Skip</a>
           </form>
-            </div> <!--fin rcol-sm-6-->
+            </div> <!--fin rcol-sm-6
   
   
       <div class="col-sm-7">
@@ -196,29 +255,38 @@ if($sth->execute(array(':id_user' => $id_user)) && $row = $sth->fetch())
   ?>
 
 
-<hr>
-<h3>Your Campaigns views: </h3>
+<!--<hr>-->
+<a href="index.php" class="btn btn-primary btn-block" >Continue</a>
+<h2>Your Campaigns  </h2>
+
 <table class="table table-striped">
     <thead>
       <tr>
         <th>Campaign n:</th>
         <th>video</th>
         <th>status</th>
-        <th>Porogress</th>
+        <th>Progress</th>
+        <th>Refresh</th>
         
       </tr>
     </thead>
     <tbody>
-      
+   
+    
       
     <?php while($row = $sth->fetch()) { ?>
-
+      
       <tr>
         <td><?php  echo $row['id']?></td>
-        <td><?php  echo $row['id_chaine']?></td>
+        <td><?php  $str1="https://www.youtube.com/watch?v=";echo $str1.$row['id_chaine']?></td>
         <td><?php  echo $row['statut_campaign']?></td>
-        <td><?php  echo $row['count_views_coins']."/".$row['count_view_chaine']?></td>
-        
+        <td><?php  echo "<span class=\"badge badge-secondary\">".$row['count_views_coins']."/".$row['count_view_chaine']."</span>"?></td>
+            <td><?php  if ($row['statut_campaign']=="IN_PROGRESS" )
+            {echo "<button class=\"btn btn-primary\" onClick=\"reload_page()\"><span class=\"glyphicon glyphicon-refresh\"></span> Refresh</button>";}
+            else{ echo "<p class=\"text-center\"button type=\"button\" class=\"close\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button></p>";}          
+            
+            ?>
+            </td>
       </tr>
     <?php } ?>
       

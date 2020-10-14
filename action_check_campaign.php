@@ -3,20 +3,25 @@
 
 
  function url_to_id(string $url) {
-  
+         
   $str1="https://www.youtube.com/watch?v=";
+  $id_chaine = trim(str_replace("$str1","","$url"));
 
-  $id_chaine="url erreur";
-
- $id_chaine = trim(str_replace("$str1","","$url"));
+ $str2=strstr("$url","$id_chaine",true);
  
- return $id_chaine;
+ if ($str1==$str2)
+   {
+     return $id_chaine;
+   }
+   else 
+   return "url_error";
 }
 
 
 include  'includes/cnx.php';
 
 try{
+  
   
 // vérification de l'accés a la bd
 
@@ -27,27 +32,26 @@ try{
 
 
  $id_chaine = url_to_id($_POST['id_chaine']);
+ 
+
  $id = $_SESSION['id'];
  $coins_value_user = $_POST['coins_value_user'];
  
- if (!empty(($id_chaine)))
+ //1 vérifier que la video n'est pas en compagne active CAD IN_PROGRESS 
+ $sth = $dbco->prepare("SELECT id_chaine FROM  youtube_campaign_views 
+ WHERE id_chaine=:id_chaine AND  statut_campaign='IN_PROGRESS'
+ ");
+
+ $sth->execute(array(
+ ':id_chaine' => $id_chaine
+
+ ));
+
+ $row = $sth->fetch();
+
+ if (!isset($row['id_chaine']))
  {
-// Requête pour réasigner l'url a nouveau ou pour la premiere fois
-// interdire de maj l'url si elle est en compagne active
-  $sth = $dbco->prepare("UPDATE youtube_user SET id_chaine=:id_chaine 
-                       WHERE id=:id  
-                       ");
-                $sth->execute(array(
-                                    ':id_chaine' => $id_chaine,
-                                    ':id' => $id
-                                  ));
-                                  
-                                //  header("location: confirmation_page.php");       
-                                
-           
-           
-                                } // fin if
-              
+
               
               
               // vérifier si les coins de l'utilisateur sont suffisant avant de créer une compagne.
@@ -98,7 +102,7 @@ try{
               
                               //$id_chaine = $_POST['id_chaine'];//id_chaine de la compagne
                               $id = $_SESSION['id'];//id_user de la compagne
-                              $statut_campaign="EN_COURS";// peut être : init ou en cours ou terminée
+                              $statut_campaign="IN_PROGRESS";// peut être : init ou en cours ou terminée
                               //$date_create_campaign=new DateTime();
                               $id_chaine_target='0';//id des chaines qui visualisent la video de la compagne
                               //$date_views_chaine=new DateTime();
@@ -106,15 +110,16 @@ try{
                               $coins_value_user=$_POST['coins_value_user']; // la valeur des coins mis par l'utilisateur
                               $count_views_coins=($coins_value_user/100);// = valeur des coins du user/100;
                               $is_admin=0;// si la video est d'un admin 0=non admin 1=admin
-                            // si count_views_coins qui est calculée au début==count_view_chaine(incrément des views des user) alors le staut de la compagne = terminée
+                              $video_banned=0;
+                              // si count_views_coins qui est calculée au début==count_view_chaine(incrément des views des user) alors le staut de la compagne = terminée
 
                             
 
 
 
 
-                             $sth = $dbco->prepare("INSERT INTO youtube_campaign_views (id_chaine, id_user, statut_campaign,date_create_campaign,id_chaine_target, date_views_chaine,count_view_chaine,count_views_coins,coins_value_user,is_admin)
-                            VALUES (:id_chaine, :id_user, :statut_campaign,NOW(),:id_chaine_target,NOW(),:count_view_chaine,:count_views_coins,:coins_value_user,:is_admin)
+                             $sth = $dbco->prepare("INSERT INTO youtube_campaign_views (id_chaine, id_user, statut_campaign,date_create_campaign,id_chaine_target, date_views_chaine,count_view_chaine,count_views_coins,coins_value_user,is_admin,video_banned)
+                            VALUES (:id_chaine, :id_user, :statut_campaign,NOW(),:id_chaine_target,NOW(),:count_view_chaine,:count_views_coins,:coins_value_user,:is_admin,:video_banned)
                                                 ");
                                           $sth->execute(array(
                                                               ':id_chaine' => $id_chaine,
@@ -124,7 +129,8 @@ try{
                                                               ':count_view_chaine' => $count_view_chaine,
                                                               ':count_views_coins' => $count_views_coins,
                                                               ':coins_value_user' => $coins_value_user,
-                                                              ':is_admin' => $is_admin
+                                                              ':is_admin' => $is_admin,
+                                                              ':video_banned' => $video_banned
                                                            
                                                             ));
                                                               
@@ -134,7 +140,12 @@ try{
                   } // fin else
       
                      
+            }//fin if (!isset($row['id_chaine']))
               
+         else 
+         echo "Your video is in campaign in progress,please wait until statut : CLOSED..."
+         ."<a href=\"index.php#tab2\">click here  </a>"
+         ;   
               
                   
               

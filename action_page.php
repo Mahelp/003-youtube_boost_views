@@ -56,16 +56,16 @@ try{
                 $entete = "From: noreply_113@marochelp.com" ;
                 
                 // Le lien d'activation est composé du email(email) et de la clé(cle)
-                $message = 'Bienvenue sur VotreSite,
+                $message = 'Welcome ,
                 
-                Pour activer votre compte, veuillez cliquer sur le lien ci-dessous
-                ou copier/coller dans votre navigateur Internet.
+                To activate your account, please click on the link below
+                or copy / paste into your internet browser.
                 
                 http://www.marochelp.com/youtube/activation.php?email='.urlencode($email).'&cle='.urlencode($cle).'
                 
                 
                 ---------------
-                Ceci est un mail automatique, Merci de ne pas y répondre.';
+                This is an automatic email, please do not reply.';
                 
                 
                 mail($destinataire, $sujet, $message, $entete) ; // Envoi du mail

@@ -1,19 +1,18 @@
 <?php
  session_start();
 include 'includes/cnx.php';
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
     
-    <title>Navigation Tab</title>
-
+    <title>Boost your Views</title>
+    <link rel="icon" href="favicon.png" type="image/gif" sizes="16x16">
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.css" rel="stylesheet">
     
@@ -56,9 +55,9 @@ include 'includes/cnx.php';
         <div id="navbar" class="collapse navbar-collapse">
         
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
+          <!--<li class="active"><a href="#">Home</a></li>-->
+            <li><a href="Faq.php">How to</a></li>
+            <li><a href="contact.php">Contact</a></li>
           </ul>
         
 
@@ -157,7 +156,8 @@ include 'includes/cnx.php';
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
 
-    $s = $db->prepare("SELECT * FROM youtube_user order by ID DESC");
+    //$s = $db->prepare("SELECT * FROM youtube_user order by ID DESC");
+    $s = $db->prepare("SELECT * FROM youtube_campaign_views WHERE statut_campaign='IN_PROGRESS' and video_banned='0' order by ID DESC");
     $s->execute();
     $allResp = $s->fetchAll(PDO::FETCH_ASSOC);
     // echo '<pre>';
@@ -172,7 +172,10 @@ include 'includes/cnx.php';
     }
     $start = ($page-1)*$limit;
 
-    $stmt = $db->prepare("SELECT * FROM youtube_user ORDER BY id DESC LIMIT $start, $limit");
+    //$stmt = $db->prepare("SELECT * FROM youtube_user ORDER BY id DESC LIMIT $start, $limit");
+    $stmt = $db->prepare("SELECT * FROM youtube_campaign_views WHERE  statut_campaign='IN_PROGRESS' and video_banned='0' ORDER BY id DESC LIMIT $start, $limit");
+    
+    
     $stmt->execute();
 
     // set the resulting array to associative
@@ -226,9 +229,14 @@ include 'includes/cnx.php';
 
     </div> <!-- fin div col-xs-12-->
 
-    
+    <!--
     <div class="col-xs-2"  > <h1> <span  class="btn btn-danger btn-lg" id="count">0</span></h1></div>
-    <div class="col-xs-10"  > <h1><span class="btn btn-danger btn-lg"> 100</span> <img src="coins_icone.png" class="img-rounded" alt="coins"></h1></div>
+    -->
+    <div class="col-xs-2"  > <h1><span  class="btn btn-danger btn-lg" id="count"><span class="glyphicon glyphicon-time"></span>  0</h1></div>
+
+   
+
+    <div class="col-xs-10"  > <h1><span class="btn btn-warning btn-lg"> 100</span> <img src="coins_icone.png" class="img-rounded" alt="coins"></h1></div>
     
     
     
@@ -278,7 +286,8 @@ include 'includes/cnx.php';
     
       function onPlayerReady(event) {
         
-        event.target.playVideo();
+        // my maj interdire la lecture auto
+        //event.target.playVideo();
         
         }
 
@@ -293,15 +302,17 @@ include 'includes/cnx.php';
 							 
                
                // block screen so user cant click
-							 /*
+							 
                 var blockDiv = $(document.createElement('videoCurrentTime'))
 								.attr('id', 'blockDiv')
-								.height('100%').width('100%')
-								.css({'z-index':'3333', 'position' : 'absolute', 'top': '0', 'left':'0'});
+								.height('300%').width('300%')
+								.css({'z-index':'3333', 'position' : 'absolute', 'top': '0', 'left':'0' });
 								 $('body').append(blockDiv);
-							 */
+							 
+
+          
 			 
-			      setTimeout(stopVideo,10000);//36000---35 seconds
+			      //setTimeout(stopVideo,10000);//36000---35 seconds
                              
                  // var myVar = setInterval(myTimer, 1000);
     
@@ -414,7 +425,7 @@ function updateHTML(elmId, value) {
                 <form class="form-group" action="action_check_campaign.php" method="post">
                       <div class="form-group">
                         <label for="url">Url video:</label>
-                        <input type="text" class="form-control" name="id_chaine"  placeholder="<?php echo "https://www.youtube.com/watch?v=".$_SESSION['id_chaine']?>" required>
+                        <input type="text" class="form-control" name="id_chaine"  placeholder=" ENTER URL VIDEO" required>
                           <label for="url">insert coins</label>
                           <input type="text" class="form-control" name="coins_value_user" required placeholder="example :100">
 
@@ -438,41 +449,23 @@ function updateHTML(elmId, value) {
     <br>
     <br>
     <br>
-    
+    <br>
+    <br>
+    <br>
+    <!--
     <div class="page-header ">
     <h1> <p class="text-primary" >sponsored videos</p> </h1>   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-    
-    </div>
-    
-
+     </div>
   <div class=row>
+    <div class="col-xs-2"> ----- </div>
+    <div class="col-xs-2"> +++++ </div>
+    <div class="col-xs-2">////// </div>
+    <div class="col-xs-2"> ......</div>
+    <div class="col-xs-2"> 11222 </div>
+    <div class="col-xs-2"> 989898 </div>
 
-<div class="col-xs-2"> ----- </div>
-<div class="col-xs-2"> +++++ </div>
-<div class="col-xs-2">////// </div>
-<div class="col-xs-2"> ......</div>
-<div class="col-xs-2"> 11222 </div>
-<div class="col-xs-2"> 989898 </div>
-
-</div>
-<br>
-<br>
-
+    </div>
+-->
 
 
 

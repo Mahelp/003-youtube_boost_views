@@ -46,7 +46,7 @@ CREATE TABLE `youtube_campaign_views` (
 --
 
 INSERT INTO `youtube_campaign_views` (`id`, `id_chaine`, `id_user`, `statut_campaign`, `date_create_campaign`, `id_chaine_target`, `date_views_chaine`, `count_view_chaine`, `count_views_coins`, `coins_value_user`, `is_admin`) VALUES
-(25, 'Q00niDCcy4E', 24, 'EN_COURS', '2020-10-13 02:07:07', 0, '2020-10-13 02:07:07', 2, 5, 500, 0);
+(25, 'Q00niDCcy4E', 24, 'IN_PROGRESS', '2020-10-13 02:07:07', 0, '2020-10-13 02:07:07', 2, 5, 500, 0);
 
 -- --------------------------------------------------------
 

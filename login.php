@@ -1,6 +1,7 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="favicon.png" type="image/gif" sizes="16x16">
 <style>
 body ,html{font-family: Arial, Helvetica, sans-serif;;}
 form{
@@ -130,7 +131,7 @@ h2,p{
           class="signup" >
             Sign Up
         </button>
-      <a href="./resetpassword.php">Forgot your password? </a>
+        <!--<a href="./resetpassword.php">Forgot your password? </a>-->
 <br>
       
     </div>
