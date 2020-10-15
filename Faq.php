@@ -1,20 +1,22 @@
 <?php
- session_start();
+include 'verif_session.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    
-    <title>Navigation Tab</title>
-    <link rel="icon" href="favicon.png" type="image/gif" sizes="16x16">
-    <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.css" rel="stylesheet">
-    
-    <style>
+<head>
+<head>
+<title>Boost your Views</title>
+<link rel="icon" href="favicon.png" type="image/gif" sizes="16x16">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+ 
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
+  <style>
     body{
       padding-top: 100px;
     }
@@ -29,10 +31,8 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
  
- 
- 
-    
-  </head>
+
+</head>
 
   <body>
     

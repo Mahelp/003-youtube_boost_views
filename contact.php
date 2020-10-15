@@ -1,166 +1,119 @@
-<?php
- session_start();
-?>
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    
-    <title>Navigation Tab</title>
-    <link rel="icon" href="favicon.png" type="image/gif" sizes="16x16">
-    <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.css" rel="stylesheet">
-    
-    <style>
-    body{
-      padding-top: 100px;
-    }
-    #content{
-      padding-left: 50px;
-    }
-    </style>
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
- 
- 
- 
-    
-  </head>
-
-  <body>
-    
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="index.php">Channel Boost Youtube</a>
-        </div>
-        <div id="navbar" class="collapse navbar-collapse">
-        
-          <ul class="nav navbar-nav">
-          <!--<li class="active"><a href="#">Home</a></li>-->
-            <li><a href="Faq.php">How to</a></li>
-            
-          </ul>
-        
-
-                           
-
-
-          <ul class="nav navbar-nav navbar-right">
-
-          
-          
-     
-      
-
-        <li><a href="profile_todo.php"><span class="glyphicon glyphicon-user"></span> Welcome :<?php  if (isset($_SESSION['login_name'])) echo $_SESSION['login_name']; ?></a></li>
-      
-        <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
-
-      </ul>
-
-      
-
-
-
-        </div><!--/.nav-collapse -->
-      </div>
-    </nav>
-
-
-
-
-
-
-
-
-
-
-
-    <h1> Contact</h1>
-    <div class="panel panel-default">
-  <div class="panel-body">
- 
-    <form action="action_contact.php" method="get">
- 
- <div class="form-group">
-    <label for="Title">Title </label>
-    <input type="title" class="form-control" id="title"  placeholder="Enter Title">
-      </div>
-
-
-
-<div class="form-group">
-    <label for="exampleFormControlTextarea1">Message</label>
-    <textarea class="form-control" id="message" rows="5"></textarea>
-  </div>
-  
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>
-
-
-
-
-
-</div>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- Footer -->
-<footer class="page-footer font-small blue">
-
-  <!-- Copyright -->
-  <div class="footer-copyright text-center py-3">© 2020 Copyright
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="favicon.png" type="image/gif" sizes="16x16">
+<style>
+body ,html{font-family: Arial, Helvetica, sans-serif;;}
+form{
+    width:fit-content;
+    padding: 60px;
    
-  </div>
-  <!-- Copyright -->
+   
+    height:fit-content;
+    margin:0 auto;
+    margin-top: 2%;
+    background-color: #f9f9f9
+}
+/* Full-width input fields */
+.form-control {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
 
-</footer>
-<!-- Footer -->
-<script src="js/jquery.js"></script>
-    <script src="js/script.js"></script>
+/* Set a style for all buttons */
+button{
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+  width: 60%;
+  margin: 5px auto;
+  padding: 15px;
+      box-shadow: 0px 5px 5px #ccc;
+      border-radius: 5px;
+      border-top: 1px solid #e9e9e9;
+  display:block;
+  text-align:center;
+}
+.signup{
+    background-color:blue;
+    margin-bottom:20px;
+}
+.login-box {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      padding: 15px;
+      background-color: #fff;
+      box-shadow: 0px 5px 5px #ccc;
+      border-radius: 5px;
+      border-top: 1px solid #e9e9e9;
+    }
+button:hover,#btn-signup:hover {
+  opacity: 0.8;
+}
+
+
+
+/* Center the image and position the close button */
+.imgcontainer {
+  text-align: center;
+  margin: 24px 0 12px 0;
+  position: relative;
+}
+
+img.avatar {
+  width: 40%;
+  border-radius: 50%;
+}
+
+.container {
+  padding: 16px;
+}
+
+span.psw {
+  float: right;
+  padding-top: 16px;
+}
+
+h2,p{
+    text-align:center;
+}
+
+
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+  span.psw {
+     display: block;
+     float: none;
+  }
   
-  </body>
+}
+</style>
+</head>
+<body>
+
+
+
+<h2>Welcome To Youtube Channel Boost</h2>
+    <p>Contact</p>
+ 
+    <form class="form-group" action="action_contact.php" method="post">
+                      <div class="form-group">
+                        <label for="title">Url video:</label>
+                        <input type="text" class="form-control" name="title"  placeholder=" title" required>
+                          
+                          <!--<input type="text" class="form-control" name="message" required placeholder="enter message">-->
+                          <!--<textarea id="message" name="message" rows="20" cols="00" required placeholder="enter message">  </textarea>-->
+                          <textarea class="form-control" id="message" name="message" rows="10" cols="10" required placeholder="enter message"></textarea>
+                      </div>
+                      <button type="submit" class="btn btn-success btn-block">Submit</button>
+             </form>
+
+</body>
 </html>

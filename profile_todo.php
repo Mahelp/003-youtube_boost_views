@@ -1,12 +1,29 @@
 <?php
-session_start();
+include 'verif_session.php';
+//session_start();
+include  'includes/cnx.php';
 ?>
+<title>Boost your Views</title>
 <link rel="icon" href="favicon.png" type="image/gif" sizes="16x16">
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <script src='https://kit.fontawesome.com/a076d05399.js'></script><!------ Include the
  above in your HEAD tag ---------->
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+ 
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
+ 
+
+   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+   <!--[if lt IE 9]>
+     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+   <![endif]-->
+
+
 
 <!-- Submitted to Feature  March 2, 2014  2:42pm  -->
 
@@ -108,7 +125,7 @@ function reload_page(){
     <?php
                       // code sert à afficher les coins par la variable row et non pas session
                       // copier coller de la page action_login.php
-                      include  'includes/cnx.php';
+                      
                             
                              try{
                                
@@ -256,7 +273,8 @@ if($sth->execute(array(':id_user' => $id_user)) && $row = $sth->fetch())
 
 
 <!--<hr>-->
-<a href="index.php" class="btn btn-primary btn-block" >Continue</a>
+<a href="index.php" class="btn btn-danger btn-block" >Continue : Click here to Go to Home PAGE   <span class="glyphicon glyphicon-arrow-right"></span></a>
+<br><br>
 <h2>Your Campaigns  </h2>
 
 <table class="table table-striped">

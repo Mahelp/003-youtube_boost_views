@@ -1,22 +1,23 @@
 <?php
- session_start();
-include 'includes/cnx.php';
+ include 'verif_session.php';
+ include 'includes/cnx.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
-  <head>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    
-    <title>Boost your Views</title>
-    <link rel="icon" href="favicon.png" type="image/gif" sizes="16x16">
-    <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.css" rel="stylesheet">
-    
-    <style>
+<head>
+<title>Boost your Views</title>
+<link rel="icon" href="favicon.png" type="image/gif" sizes="16x16">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+ 
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
+  <style>
     body{
       padding-top: 100px;
     }
@@ -31,37 +32,18 @@ include 'includes/cnx.php';
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
  
- 
- 
-    
-  </head>
+
+</head>
+
+
+
 
   <body>
   
   <script src="https://cdn.jsdelivr.net/gh/mathusummut/confetti.js/confetti.min.js"></script>
     <script>confetti.start(50); </script>
    
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="index.php">Channel Boost Youtube</a>
-        </div>
-        <div id="navbar" class="collapse navbar-collapse">
-        
-          <ul class="nav navbar-nav">
-          <!--<li class="active"><a href="#">Home</a></li>-->
-            <li><a href="Faq.php">How to</a></li>
-            <li><a href="contact.php">Contact</a></li>
-          </ul>
-        
-
-                            <?php
+    <?php
                              include  'includes/cnx.php';
                             
                              try{
@@ -109,45 +91,68 @@ include 'includes/cnx.php';
                             ?>
 
 
+
+
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+         
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="index.php">Channel Boost Youtube</a>
+        </div>
+
+        <div  class="collapse navbar-collapse" id="navbar">
+        
+          <ul class="nav navbar-nav">
+          <!--<li class="active"><a href="#">Home</a></li>-->
+            <li><a href="Faq.php">How to</a></li>
+            <li><a href="contact.php">Contact</a></li>
+          </ul>
+        
+
+
+
+
           <ul class="nav navbar-nav navbar-right">
 
           
           
         <li>
         <a href="#" class="btn btn-danger btn-lg">
-          <span class="glyphicon glyphicon-bitcoin"></span><img src="coins_icone_min.png" class="img-rounded" alt="coins"> <?php if (isset($coins_value)) echo $coins_value;?> 
+         <img src="coins_icone_min.png" class="img-rounded" alt="coins"> <?php if (isset($coins_value)) echo $coins_value;?> 
         </a>
         </li>
-
-      
-
         <li><a href="profile_todo.php"><span class="glyphicon glyphicon-user"></span> Welcome :<?php  if (isset($_SESSION['login_name'])) echo $_SESSION['login_name']; ?></a></li>
-      
         <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
-
       </ul>
-
-      
-
-
 
         </div><!--/.nav-collapse -->
       </div>
     </nav>
+
+
 
     <div class="container">
 <br>
 
 
     <ul class="tabs">
-      <li class="btn btn-primary active"><a style="color:#FFFFFF" href="#tab1"><h1> <span class="glyphicon glyphicon-facetime-video"></span> View video and win coins</h1></a></li>
+      <li class="btn btn-primary active"><a style="color:#FFFFFF" href="#tab1"><h1> <span class="glyphicon glyphicon-facetime-video"></span> View videos and win coins</h1></a></li>
       <li class="btn btn-success"><a  style="color:#FFFFFF"href="#tab2"><h1> <span class="glyphicon glyphicon-bullhorn"></span>
      Campaign boost views </h1></a></li>
       <!-- <li class="btn btn-default"><a href="#tab3">Menu 3</a></li>-->
     </ul>
     
     <div class="article" id="tab1">
-  
+    <h2><ins>1-Select video and wait</ins> </h2>
+    <br>
     <?php
 
     $limit = 1;
@@ -232,11 +237,11 @@ include 'includes/cnx.php';
     <!--
     <div class="col-xs-2"  > <h1> <span  class="btn btn-danger btn-lg" id="count">0</span></h1></div>
     -->
-    <div class="col-xs-2"  > <h1><span  class="btn btn-danger btn-lg" id="count"><span class="glyphicon glyphicon-time"></span>  0</h1></div>
+    <div class="col-xs-6"  > <span  class="btn btn-danger btn-block" id="count"><h4><span class="glyphicon glyphicon-time"> 0 </span></h4> </span></div>
 
    
 
-    <div class="col-xs-10"  > <h1><span class="btn btn-warning btn-lg"> 100</span> <img src="coins_icone.png" class="img-rounded" alt="coins"></h1></div>
+    <div class="col-xs-6"  > <span class="btn btn-warning btn-block"><h4> wait...and win : 100 <img src="coins_icone_min.png" class="img-rounded" alt="coins"></span></h4> </div>
     
     
     
@@ -319,7 +324,7 @@ include 'includes/cnx.php';
 											
                         var wincoins=0;
                         console.log(wincoins);
-                        var count = 10;
+                        var count = 70//10;
 												var interval = setInterval(function(){
 												  document.getElementById('count').innerHTML=count;
 												  count--;
@@ -419,7 +424,8 @@ function updateHTML(elmId, value) {
     </div><!-- fin <div class="article" id="tab1"> -->
 
     <div class="article" id="tab2">
-    <h3>Create campaign</h3>
+    <h2> <ins>2-Create campaign</ins></h2>
+    <br>
     <div class="row">
             <div class="col-sm-4">
                 <form class="form-group" action="action_check_campaign.php" method="post">
@@ -434,7 +440,9 @@ function updateHTML(elmId, value) {
              </form>
                  </div><!--col-sm-4-->
                       <div class="col-sm-8">
-                      <div class="col-sm-8"><h1>You have : <img src="coins_icone_min.png" class="img-rounded" alt="coins"> <?php if (isset($coins_value)) echo $coins_value ?> Coins</h1> </div>
+                      <div class="container alert alert-success" style="padding-top: 100px;">
+                      <h1>You have :  <?php if (isset($coins_value)) echo $coins_value ?>  <img src="coins_icone_min.png" class="img-rounded" alt="coins"></h1>
+                      </div>
                       </div><!--col-sm-8-->    
          
           
@@ -501,6 +509,7 @@ function updateHTML(elmId, value) {
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
+   
     <script src="js/jquery.js"></script>
     <script src="js/script.js"></script>
   

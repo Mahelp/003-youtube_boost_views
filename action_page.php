@@ -3,6 +3,7 @@
 include  'includes/cnx.php';
 
 
+
 try{
   
 // vérification de l'accés a la bd
@@ -15,12 +16,17 @@ try{
   $login_name=strip_tags($_POST['login_name']);
   $email=strip_tags($_POST['email']);
   $pass=strip_tags($_POST['pass']);
+  $pass_repeat=$_POST['pass_repeat'];
   $cle='0';//strip_tags($_POST['cle']);
   $actif='0';//strip_tags($_POST['actif']);
   $id_chaine='0';//strip_tags($_POST['id_chaine']);
   $video_banned='0';
-// exécution de la requête d'insertion (INSERTION)
-  $sth = $dbco->prepare("INSERT INTO youtube_user (login_name, email, pass,cle,actif, id_chaine,video_banned)
+// vérifer si les deux mot de passes sont similaire sinon erreur
+ 
+   if ($pass==$pass_repeat)
+  
+   {
+    $sth = $dbco->prepare("INSERT INTO youtube_user (login_name, email, pass,cle,actif, id_chaine,video_banned)
                        VALUES (:login_name, :email, :pass,:cle,:actif, :id_chaine,:video_banned)
                        ");
                 $sth->execute(array(
@@ -33,7 +39,7 @@ try{
                                     ':video_banned' => $video_banned
                                   ));
                                     
-                echo "Entrée ajoutée dans la table";
+               // echo "Entrée ajoutée dans la table";
             
             
       // générer la clé d'authentification (UPDATE)
@@ -45,12 +51,12 @@ try{
                                     ':cle' => $cle,
                                     ':email' => $email));
                                     
-                echo "Table a été mise à jour";
+               // echo "Table a été mise à jour";
         
             
                 // Préparation du mail contenant le lien d'activation
                 
-                echo  $email;
+                //echo  $email;
                 $destinataire = $email;
                 $sujet = "Activer votre compte" ;
                 $entete = "From: noreply_113@marochelp.com" ;
@@ -70,8 +76,15 @@ try{
                 
                 mail($destinataire, $sujet, $message, $entete) ; // Envoi du mail
                 
+                echo "Congratulation your account has been created ". "<a href=\"signup.php\"> clic here </a> ";
+                
 
+                }// fin if ($pass==$pass_repeat)
+                else 
+                {
+                  echo "The two passwords are not similar,please retype password ". "<a href=\"signup.php\"> clic here </a> "; 
 
+                }// fin else
 
 
             

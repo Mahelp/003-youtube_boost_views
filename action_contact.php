@@ -1,8 +1,10 @@
 
 <?php
 
-$title = $_GET["title"];
-$message = $_GET["message"];
+
+
+$title=strip_tags($_POST['title']);
+$message = $_POST["message"];
 
 
 try
@@ -12,16 +14,20 @@ try
     $objet= $title."<br><br><br>";
     $message= $message;
     $headers='Content-Type: text/html; charset=iso-8859-1';
+  
+    
+    
+
+  
     mail($destinataire, $objet, $message, $headers);
     echo "Thank you, we will reply you soon ;)"
-    . "<a href=\"index.php\">click here to return </a>" 
-    ; 
-   }
+    . "<a href=\"index.php\">click here to return </a>"; 
+  
+}
     catch(PDOException $e){
         echo "Erreur : " . $e->getMessage();
   
       
 
     }// fin catch
-
 ?>

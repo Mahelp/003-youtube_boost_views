@@ -36,7 +36,7 @@ else // Si ce n'est pas le cas on passe aux comparaisons
    if($cle == $clebdd) // On compare nos deux clés    
      {
         // Si elles correspondent on active le compte !    
-        echo "Your account has been activated !";
+        echo "Your account has been activated !"."please click here to login"."<a href=\"login.php\">Login page</a>";
 
         // La requête qui va passer notre champ actif de 0 à 1
         $stmt = $dbco->prepare("UPDATE youtube_user SET actif = 1 WHERE email like :email ");

@@ -91,6 +91,7 @@ button:hover {
   }
 }
 </style>
+
 <body>
 
 <form action="action_page.php" style="border:1px solid #ccc" method="post">
@@ -109,8 +110,8 @@ button:hover {
     <label for="pass"><b>Password</b></label>
     <input type="password" placeholder="Enter Password" name="pass" required>
 
-    <label for="pass-repeat"><b>Repeat Password</b></label>
-    <input type="password" placeholder="Repeat Password" name="pass-repeat" required>
+    <label for="pass_repeat"><b>Repeat Password</b></label>
+    <input type="password" placeholder="Repeat Password" name="pass_repeat" required>
     
     <label>
       <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me

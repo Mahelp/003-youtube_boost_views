@@ -1,39 +1,38 @@
 <?php
  session_start();                            
 
-
- function url_to_id(string $url) {
-         
-  $str1="https://www.youtube.com/watch?v=";
-  $id_chaine = trim(str_replace("$str1","","$url"));
-
- $str2=strstr("$url","$id_chaine",true);
- 
- if ($str1==$str2)
-   {
-     return $id_chaine;
-   }
-   else 
-   return "url_error";
-}
-
-
 include  'includes/cnx.php';
+
+ 
 
 try{
   
-  
+
 // vérification de l'accés a la bd
 
   $dbco = new PDO("mysql:host=$servname;dbname=$dbname", $user, $pass);
   $dbco->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 // récupération des paramétres 
+/* 
+changer url en id :
+si l'url = https://www.youtube.com/watch?v=xxxxxxxxxxx
+si l'url =https://youtu.be/xxxxxxxxxxxxxx
 
 
- $id_chaine = url_to_id($_POST['id_chaine']);
+*/
+if (strstr($_POST['id_chaine'], '=', true)=="https://www.youtube.com/watch?v")
+{
+$id_chaine=str_replace("=","",stristr($_POST['id_chaine'], '='));
+}
+if (strstr($_POST['id_chaine'], 'be/', true)=="https://youtu.")
+{
+$id_chaine=str_replace("be/","",stristr($_POST['id_chaine'], 'be/'));
+}
  
-
+//$id_chaine = ($_POST['id_chaine']);
+ 
+  
  $id = $_SESSION['id'];
  $coins_value_user = $_POST['coins_value_user'];
  
@@ -143,9 +142,8 @@ try{
             }//fin if (!isset($row['id_chaine']))
               
          else 
-         echo "Your video is in campaign in progress,please wait until statut : CLOSED..."
-         ."<a href=\"index.php#tab2\">click here  </a>"
-         ;   
+         echo "URL error OR Your video is in campaign in progress,please wait until statut : CLOSED..."
+         ."<a href=\"index.php#tab2\">click here  </a>";   
               
                   
               
