@@ -151,7 +151,7 @@
     </ul>
     
     <div class="article" id="tab1">
-    <h2><ins>1-Select video and wait</ins> </h2>
+    <h2><ins>1-Play video and wait</ins> </h2>
     <br>
     <?php
 
@@ -237,11 +237,11 @@
     <!--
     <div class="col-xs-2"  > <h1> <span  class="btn btn-danger btn-lg" id="count">0</span></h1></div>
     -->
-    <div class="col-xs-6"  > <span  class="btn btn-danger btn-block" id="count"><h4><span class="glyphicon glyphicon-time"> 0 </span></h4> </span></div>
+    <div class="col-xs-6"  > <span  class="btn btn-danger btn-block" id="count"><h2 class="display-2"><span class="glyphicon glyphicon-time"> 0 </span></h2> </span></div>
 
-   
+    
 
-    <div class="col-xs-6"  > <span class="btn btn-warning btn-block"><h4> wait...and win : 100 <img src="coins_icone_min.png" class="img-rounded" alt="coins"></span></h4> </div>
+    <div class="col-xs-6"  > <span class="btn btn-warning btn-block"><h2 class="display-2"> wait...and win : 100 <img src="coins_icone_min.png" class="img-rounded" alt="coins"></span></h2> </div>
     
     
     
@@ -312,8 +312,10 @@
 								.attr('id', 'blockDiv')
 								.height('300%').width('300%')
 								.css({'z-index':'3333', 'position' : 'absolute', 'top': '0', 'left':'0' });
-								 $('body').append(blockDiv);
-							 
+                document.documentElement.requestFullscreen(); 
+                document.oncontextmenu = new Function("return false");
+                $('body').append(blockDiv);
+                 
 
           
 			 
@@ -326,7 +328,7 @@
                         console.log(wincoins);
                         var count = 70//10;
 												var interval = setInterval(function(){
-												  document.getElementById('count').innerHTML=count;
+												  document.getElementById('count').innerHTML="<h2 class=\"display-2\"> <span class=\"glyphicon glyphicon-time\">" +count+ " </h2></span>";
 												  count--;
 												  if (count === 0){
 															clearInterval(interval);

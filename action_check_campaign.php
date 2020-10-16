@@ -18,16 +18,18 @@ try{
 changer url en id :
 si l'url = https://www.youtube.com/watch?v=xxxxxxxxxxx
 si l'url =https://youtu.be/xxxxxxxxxxxxxx
-
-
+$flag='0'= veut dire que l(url) entré n'est ni le cas1 ni le cas2
 */
+$flag='0';
 if (strstr($_POST['id_chaine'], '=', true)=="https://www.youtube.com/watch?v")
 {
 $id_chaine=str_replace("=","",stristr($_POST['id_chaine'], '='));
+$flag='1';
 }
 if (strstr($_POST['id_chaine'], 'be/', true)=="https://youtu.")
 {
 $id_chaine=str_replace("be/","",stristr($_POST['id_chaine'], 'be/'));
+$flag='1';
 }
  
 //$id_chaine = ($_POST['id_chaine']);
@@ -48,7 +50,7 @@ $id_chaine=str_replace("be/","",stristr($_POST['id_chaine'], 'be/'));
 
  $row = $sth->fetch();
 
- if (!isset($row['id_chaine']))
+ if (!isset($row['id_chaine']) AND $flag=='1')
  {
 
               

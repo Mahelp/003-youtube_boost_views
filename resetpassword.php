@@ -101,8 +101,8 @@ h2,p{
 
 
 <h2>Welcome To Youtube Channel Boost</h2>
-    <p>Sign in</p>
-  <form  action="action_login.php" method="post">
+    <p>Reset password</p>
+  <form  action="action_resetpassword.php" method="post">
     <div class="container">
       
       <label for="email"><b>Email</b></label>
@@ -111,34 +111,12 @@ h2,p{
           type="text"
           class="form-control"
           placeholder="Enter your email"
-          required pattern='/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/'>
+          required>
 
-
-
-
-      <label for="name"><b>Password</b</label>
-          <input
-            type="password"
-            class="form-control"
-            name="pass"
-            placeholder="Enter your password"
-                 minlength="8"
-                 required>
-        
-      <button type="submit">Login</button>
-      <button type="button" onclick="window.location.href='signup.php'"
-       
-          class="signup" >
-            Sign Up
-        </button>
-        <a href="resetpassword.php">Forgot your password? </a>
+      <button type="submit">submit</button>
 <br>
-      
+
     </div>
-
-    
-
-    
   </form>
 
 

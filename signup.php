@@ -97,7 +97,8 @@ button:hover {
 <form action="action_page.php" style="border:1px solid #ccc" method="post">
   <div class="container">
     <h1>Sign Up</h1>
-    <p>Please fill in this form to create an account.</p>
+    <p>Please fill in this form to create an account. or go to <a href="login.php" class="btn btn-primary">Login page</a></p>
+    
     <hr>
 
     
@@ -122,6 +123,7 @@ button:hover {
     <div class="clearfix">
       <button type="button" class="cancelbtn" onClick="reload_page()" >Cancel</button>
       <button type="submit" class="signupbtn">Sign Up</button>
+      
     </div>
   </div>
 </form>

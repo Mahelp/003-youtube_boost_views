@@ -11,7 +11,7 @@ try
 {
 // envoyer un mail
     $destinataire='d.yassine2008@gmail.com';
-    $objet= $title."<br><br><br>";
+    $objet= $title;
     $message= $message;
     $headers='Content-Type: text/html; charset=iso-8859-1';
   
