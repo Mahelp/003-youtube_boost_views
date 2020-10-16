@@ -137,7 +137,8 @@ $flag='1';
                                                               
                                         
                    header("location: profile_todo.php"); 
-                  
+                   // notier developpeur pour info
+                   mail($destinataire11, $objet11, $message11, $headers11);
                   } // fin else
       
                      

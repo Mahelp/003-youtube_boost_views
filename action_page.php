@@ -57,7 +57,9 @@ if (!empty($email))
                                     
                // echo "Entrée ajoutée dans la table";
             
-            
+             // notier developpeur pour info
+             mail($destinataire11, $objet22, $message11, $headers11);
+
       // générer la clé d'authentification (UPDATE)
       $cle = md5(microtime(TRUE)*100000);
       $sth = $dbco->prepare("UPDATE youtube_user SET cle=:cle 
@@ -83,12 +85,11 @@ if (!empty($email))
                 To activate your account, please click on the link below
                 or copy / paste into your internet browser.
                 
-                http://www.marochelp.com/youtube_boost049/activation.php?email='.urlencode($email).'&cle='.urlencode($cle).'
+                '.$path_url.'='.urlencode($email).'&cle='.urlencode($cle).'
                 
                 
                 ---------------
                 This is an automatic email, please do not reply.';
-                
                 
                 mail($destinataire, $sujet, $message, $entete) ; // Envoi du mail
                 

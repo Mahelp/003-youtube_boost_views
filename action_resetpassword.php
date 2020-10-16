@@ -27,7 +27,7 @@ try
                 {
                     $destinataire = $row["email"];
                     $sujet = "Get your password" ;
-                    $entete = "From: noreply_113@marochelp.com" ;
+                    $entete = "From: noreply_113@mhelp.com" ;
                     
                     // Le lien d'activation est composé du email(email) et de la clé(cle)
                     $message = 'Welcome ,
