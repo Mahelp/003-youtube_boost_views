@@ -93,7 +93,7 @@ if (!empty($email))
                 
                 mail($destinataire, $sujet, $message, $entete) ; // Envoi du mail
                 
-                echo "Congratulation your account has been created,an email has already been sent to your email box ". "<a href=\"login.php\"> click here </a> ";
+                echo "Congratulation your account has been created,an email has already been sent to your email box ,please check your email after and active your account after that ". "<a href=\"login.php\"> click here </a> ";
                 
 
                 }// fin if ($pass==$pass_repeat)

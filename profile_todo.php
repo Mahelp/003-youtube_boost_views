@@ -296,7 +296,20 @@ if($sth->execute(array(':id_user' => $id_user)) && $row = $sth->fetch())
       
       <tr>
         <td><?php  echo $row['id']?></td>
-        <td><?php  $str1="https://www.youtube.com/watch?v=";echo $str1.$row['id_chaine']?></td>
+        <td>
+        <?php  $url_finale="https://www.youtube.com/watch?v=".$row['id_chaine'];
+       
+       echo  "<a href=".$url_finale.">Views Video</a>";
+        
+       $url_Embded = "https://www.youtube.com/embed/".$row['id_chaine'];
+       
+            echo"<div class=\"embed-responsive embed-responsive-16by9\">
+               <iframe class=\"embed-responsive-item\" src=".$url_Embded."></iframe>
+               </div>  "
+        ?>
+        
+        
+        </td>
         <td><?php  echo $row['statut_campaign']?></td>
         <td><?php  echo "<span class=\"badge badge-secondary\">".$row['count_views_coins']."/".$row['count_view_chaine']."</span>"?></td>
             <td><?php  if ($row['statut_campaign']=="IN_PROGRESS" )

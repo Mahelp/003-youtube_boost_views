@@ -39,7 +39,8 @@ try
                 $_SESSION['login_name']=$row["login_name"];
                 $_SESSION['id_chaine']=$row["id_chaine"];
                 $_SESSION['coins_value']=$row["coins_value"];
-                header("location: profile_todo.php");
+                //header("location: profile_todo.php");
+                header("location: index.php");
              }
               else 
               {
