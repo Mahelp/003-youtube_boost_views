@@ -16,4 +16,9 @@ $objet22="TO_DO_YOUTUBE_NEW_USER";
 //validation mail
 $path_url="http://www.marochelp.com/youtube_boost049/activation.php?email";
 
+
+// variable video help Arabic
+$url_ar_help="http://www.youtube.com/embed/LS9J72mjldw";
+
+
 ?>

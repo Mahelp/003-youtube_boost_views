@@ -1,3 +1,8 @@
+<?php
+
+include  'includes/cnx.php';
+
+?>
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -100,11 +105,27 @@ h2,p{
 
 
 
+
+
+
 <h2>Welcome To Youtube Channel Boost</h2>
+    
+
+
+    
+    
     <p>Sign in</p>
   <form  action="action_login.php" method="post">
     <div class="container">
-      
+    
+    <h2 class="text-center">How to use our platform translation Arabic  
+
+    <div class="embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item" src="<?php echo $url_ar_help; ?>" width="500" height="300" allowfullscreen="allowfullscreen"></iframe></div>
+   
+    </h2>
+
+   <br>
+
       <label for="email"><b>Email</b></label>
           <input
           name="email"

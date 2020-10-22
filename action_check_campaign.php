@@ -21,6 +21,7 @@ si l'url =https://youtu.be/xxxxxxxxxxxxxx
 $flag='0'= veut dire que l(url) entré n'est ni le cas1 ni le cas2
 */
 $flag='0';
+$id_chaine=0;
 if (strstr($_POST['id_chaine'], '=', true)=="https://www.youtube.com/watch?v")
 {
 $id_chaine=str_replace("=","",stristr($_POST['id_chaine'], '='));
@@ -72,7 +73,7 @@ $flag='1';
               }
 
 
-              if ($coins_value_user > $coins_value ) 
+              if ($coins_value_user > $coins_value AND is_numeric($coins_value_user)==true ) 
               {
                                                      
                 echo "error you do not have Enough coins..."."<a href=\"index.php#tab2\">Click her please </a>";

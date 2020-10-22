@@ -247,6 +247,7 @@ $count_view_chaine=0;
 $sth = $dbco->prepare("SELECT id,id_chaine,statut_campaign,count_views_coins,count_view_chaine	 
                        FROM  youtube_campaign_views 
                        WHERE id_user=:id_user 
+                       order by id desc
                        ");
 
 $sth->execute(array(
@@ -273,7 +274,8 @@ if($sth->execute(array(':id_user' => $id_user)) && $row = $sth->fetch())
 
 
 <!--<hr>-->
-<a href="index.php" class="btn btn-danger btn-block" >Continue : Click here to Go to Home PAGE   <span class="glyphicon glyphicon-arrow-right"></span></a>
+
+<a href="index.php" class="btn btn-danger btn-block" > Go to Home page   <span class="glyphicon glyphicon-arrow-right"></span></a>
 <br><br>
 <h2>Your Campaigns  </h2>
 
@@ -310,8 +312,8 @@ if($sth->execute(array(':id_user' => $id_user)) && $row = $sth->fetch())
         
         
         </td>
-        <td><?php  echo $row['statut_campaign']?></td>
-        <td><?php  echo "<span class=\"badge badge-secondary\">".$row['count_views_coins']."/".$row['count_view_chaine']."</span>"?></td>
+        <td><?php  echo "<span class=\"label label-default\">".$row['statut_campaign']."</span>"?></td>
+        <td><?php  echo "<span class=\"badge badge-secondary\"><h1>".$row['count_views_coins']."/".$row['count_view_chaine']."</h1></span>"?></td>
             <td><?php  if ($row['statut_campaign']=="IN_PROGRESS" )
             {echo "<button class=\"btn btn-primary\" onClick=\"reload_page()\"><span class=\"glyphicon glyphicon-refresh\"></span> Refresh</button>";}
             else{ echo "<p class=\"text-center\"button type=\"button\" class=\"close\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button></p>";}          

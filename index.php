@@ -11,11 +11,22 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  
+  <script>
+
+function reload_page(){
+ 
+  document.location.reload(true);
+
+}
+</script>
+
+
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
  
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
+  
+ 
 
   <style>
     body{
@@ -144,9 +155,9 @@
 
 
     <ul class="tabs">
-      <li class="btn btn-primary active"><a style="color:#FFFFFF" href="#tab1"><h1> <span class="glyphicon glyphicon-facetime-video"></span> View videos and win coins</h1></a></li>
-      <li class="btn btn-success"><a  style="color:#FFFFFF"href="#tab2"><h1> <span class="glyphicon glyphicon-bullhorn"></span>
-     Campaign boost views </h1></a></li>
+      <li class="btn btn-primary active"><a style="color:#FFFFFF" href="#tab1"><h2> <span class="glyphicon glyphicon-facetime-video"></span> View videos and win coins</h2></a></li>
+      <li class="btn btn-success"><a  style="color:#FFFFFF"href="#tab2"><h2> <span class="glyphicon glyphicon-bullhorn"></span>
+     Campaign boost views </h2></a></li>
       <!-- <li class="btn btn-default"><a href="#tab3">Menu 3</a></li>-->
     </ul>
     
@@ -426,7 +437,7 @@ function updateHTML(elmId, value) {
     </div><!-- fin <div class="article" id="tab1"> -->
 
     <div class="article" id="tab2">
-    <h2> <ins>2-Create campaign</ins></h2>
+    <h2> <ins>2- Create campaign</ins></h2>
     <br>
     <div class="row">
             <div class="col-sm-4">
@@ -440,11 +451,167 @@ function updateHTML(elmId, value) {
                       </div>
                       <button type="submit" class="btn btn-success btn-block">Create campaign</button>
              </form>
+                 
+        <hr>
+               
+             <table class="table">
+    <thead>
+      <tr class="success">
+        <th><h3>Coins value<h3></th>
+        <th><h3>nbr of views<h3></th>
+        <th><h3>nbr of seconds<h3></th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="active">
+        <td><h4>100 coins</h4></td>
+        <td><h4>1 Vue</h4></td>
+        <td><h4>70 s</h4></td>
+        
+      </tr>
+    </tbody>
+
+    <tbody>
+      <tr class="active">
+        <td><h4>200 coins</h4></td>
+        <td><h4>2 vues</h4></td>
+        <td><h4>140 s</h4></td>
+        
+      </tr>
+    </tbody>
+
+
+    <tbody>
+      <tr class="active">
+        <td><h4>300 coins</h4></td>
+        <td><h4>3 vues</h4> </td>
+        <td><h4>210 s</h4></td>
+        
+      </tr>
+    </tbody>
+
+
+    <tbody>
+      <tr class="active">
+        <td><h4>400...</h4></td>
+        <td><h4>4... </h4></td>
+        <td><h4>240...</h4></td>
+        
+      </tr>
+    </tbody>
+
+  </table>
+                 
+                 
+                 
+                 
                  </div><!--col-sm-4-->
                       <div class="col-sm-8">
+                      
                       <div class="container alert alert-success" style="padding-top: 100px;">
                       <h1>You have :  <?php if (isset($coins_value)) echo $coins_value ?>  <img src="coins_icone_min.png" class="img-rounded" alt="coins"></h1>
                       </div>
+
+<hr>
+    
+
+
+
+<?php
+  
+  
+  $dbco = new PDO("mysql:host=$servname;dbname=$dbname", $user, $pass);
+  $dbco->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  
+  // récupération et initialisation des paramétres 
+
+$id_user = $_SESSION['id']; // id du user
+$id_chaine =0;
+$statut_campaign=0;
+$count_views_coins=0;
+$count_view_chaine=0;
+
+// requête 
+$sth = $dbco->prepare("SELECT id,id_chaine,statut_campaign,count_views_coins,count_view_chaine	 
+                       FROM  youtube_campaign_views 
+                       WHERE id_user=:id_user 
+                       order by id desc
+                       ");
+
+$sth->execute(array(
+':id_user' => $id_user
+));
+
+?>
+
+
+<h2>Your Campaigns  </h2>
+
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Campaign n:</th>
+        <th>video</th>
+        <th>status</th>
+        <th>Progress</th>
+        <th>Refresh</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+   
+    
+      
+    <?php while($row = $sth->fetch()) { ?>
+      
+      <tr>
+        <td><?php  echo $row['id']?></td>
+        <td>
+        <?php  $url_finale="https://www.youtube.com/watch?v=".$row['id_chaine'];
+       
+       echo  "<a href=".$url_finale.">Views Video</a>";
+        
+       $url_Embded = "https://www.youtube.com/embed/".$row['id_chaine'];
+       
+            echo"<div class=\"embed-responsive embed-responsive-16by9\">
+               <iframe class=\"embed-responsive-item\" src=".$url_Embded."></iframe>
+               </div>  "
+        ?>
+        
+        
+        </td>
+        <td><?php  echo $row['statut_campaign']?></td>
+        <td><?php  echo "<span class=\"badge badge-secondary\">".$row['count_views_coins']."/".$row['count_view_chaine']."</span>"?></td>
+            <td><?php  if ($row['statut_campaign']=="IN_PROGRESS" )
+            {echo "<button class=\"btn btn-primary\" onClick=\"reload_page()\"><span class=\"glyphicon glyphicon-refresh\"></span> Refresh</button>";}
+            else{ echo "<p class=\"text-center\"button type=\"button\" class=\"close\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button></p>";}          
+            
+            ?>
+            </td>
+      </tr>
+    <?php } ?>
+      
+     
+    </tbody>
+  
+  </table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                       </div><!--col-sm-8-->    
          
           

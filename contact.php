@@ -105,9 +105,7 @@ h2,p{
  
     <form class="form-group" action="action_contact.php" method="post">
                       <div class="form-group">
-                        <label for="title">Url video:</label>
-                        <input type="text" class="form-control" name="title"  placeholder=" title" required>
-                          
+                         <input type="text" class="form-control" name="title"  placeholder=" title" required>
                           <!--<input type="text" class="form-control" name="message" required placeholder="enter message">-->
                           <!--<textarea id="message" name="message" rows="20" cols="00" required placeholder="enter message">  </textarea>-->
                           <textarea class="form-control" id="message" name="message" rows="10" cols="10" required placeholder="enter message"></textarea>
